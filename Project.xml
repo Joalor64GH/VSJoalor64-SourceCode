@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="FNF but it's me IRL" file="VsJoalor64" packageName="com.watafac.lmao" package="com.watafac.lmao" main="Main" version="0.2.7" company="Joalor64GH" />
+	<app title="FNF but it's me LMAO" file="VsJoalor64" packageName="com.watafac.lmao" package="com.watafac.lmao" main="Main" version="0.2.7" company="Joalor64GH" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />

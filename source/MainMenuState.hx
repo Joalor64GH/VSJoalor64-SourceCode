@@ -25,20 +25,20 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
+	public static var Modver:String = '1.0.0'; //This is also used for Discord RPC
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
+	public static var firstStart:Bool = true;
+	public static var finishedFunnyMove:Bool = false;
 	
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
-		#if ACHIEVEMENTS_ALLOWED 'awards', #end
-		'credits',
-		#if !switch 'donate', #end
+		'extras',
 		'options'
 	];
 
@@ -123,6 +123,14 @@ class MainMenuState extends MusicBeatState
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
+			if (firstStart)
+					FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
+						{
+							finishedFunnyMove = true; 
+							changeItem();
+						}});
+				else
+					menuItem.y = 60 + (i * 160);
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
@@ -200,12 +208,6 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == 'donate')
-				{
-					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
-				}
-				else
-				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 
@@ -249,7 +251,6 @@ class MainMenuState extends MusicBeatState
 							});
 						}
 					});
-				}
 			}
 			#if desktop
 			else if (FlxG.keys.anyJustPressed(debugKeys))

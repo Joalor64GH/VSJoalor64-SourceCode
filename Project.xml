@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="FNF but it's me LMAO" file="VsJoalor64" packageName="com.watafac.lmao" package="com.watafac.lmao" main="Main" version="0.2.7" company="Joalor64GH" />
+	<app title="FNF but it's Joalor64" file="VsJoalor64" packageName="com.watafac.lmao" package="com.watafac.lmao" main="Main" version="0.2.7" company="Joalor64GH" />
 
 	<!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND -->
 	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/> <!-- stable luas PUT AFTER FIRST LINE WITH APP NAME AND ETC -->

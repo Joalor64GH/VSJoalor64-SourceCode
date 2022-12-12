@@ -100,9 +100,6 @@ class MainMenuState extends MusicBeatState
 		add(menuItems);
 
 		var scale:Float = 1;
-		/*if(optionShit.length > 6) {
-			scale = 6 / optionShit.length;
-		}*/
 
 		for (i in 0...optionShit.length)
 		{
@@ -132,6 +129,10 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
+        var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "VS Joalor64 v" + Modver, 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -140,8 +141,6 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-
-		// NG.core.calls.event.logEvent('swag').send();
 
 		changeItem();
 

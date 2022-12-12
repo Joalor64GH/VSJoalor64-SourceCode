@@ -7,7 +7,7 @@ function onEndSong()
         -- Block the first countdown and start a timer of 0.8 seconds to play the dialogue
         if (not allowEnd) and (misses == 0) then
             setProperty('inCutscene', true);
-            callOnLuas('unlockAchievement', {"learning", getPropertyFromClass('Paths', 'currentModDirectory'), false})
+            callOnLuas('unlockAchievement', {"tutorial_win", getPropertyFromClass('Paths', 'currentModDirectory'), false})
             allowEnd = true;
             runTimer('endSongFromAchievement', 4)
             return Function_Stop;

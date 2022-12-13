@@ -2342,7 +2342,7 @@ class PlayState extends MusicBeatState
 			scoreTxt.text = 'Score: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' // Rank: ' + ratingFC;//peeps wanted no integer rating
 		}
 		if(cpuControlled) {
-			songScore = 'Cheater!';
+			scoreTxt = 'Cheater!';
 		}
 
 		if(botplayTxt.visible) {

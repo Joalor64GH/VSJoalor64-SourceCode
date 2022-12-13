@@ -2342,7 +2342,7 @@ class PlayState extends MusicBeatState
 			scoreTxt.text = 'Score: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' // Rank: ' + ratingFC;//peeps wanted no integer rating
 		}
 		if(cpuControlled) {
-			scoreTxt.text = 'Cheater!';
+			songScore = 'Cheater!';
 		}
 
 		if(botplayTxt.visible) {
@@ -4451,10 +4451,10 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			if (sicks > 0) ratingFC = "SFC";
-			if (goods > 0) ratingFC = "GFC";
-			if (bads > 0 || shits > 0) ratingFC = "FC";
-			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
+			if (sicks > 0) ratingFC = "QDAC";
+			if (goods > 0) ratingFC = "GASFC";
+			if (bads > 0 || shits > 0) ratingFC = "RFC";
+			if (songMisses > 0 && songMisses < 10) ratingFC = "SDM";
 			else if (songMisses >= 10) ratingFC = "Clear";
 		}
 		setOnLuas('rating', ratingPercent);

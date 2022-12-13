@@ -1,6 +1,4 @@
 First Steps|steps|Open the Achievements menu.|false
 Learning!|tutorial_win|Finish tutorial.|false
 Okay then|lmao|Beat the main week.|false
-How tho??|keymaster|FC the main week.|false
 You beat the entire thing yey|bonus|Beat the bonus week.|true
-Dayum you're good|ligma|FC the bonus week.|true

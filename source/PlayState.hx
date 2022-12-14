@@ -60,7 +60,7 @@ import sys.FileSystem;
 #end
 
 #if VIDEOS_ALLOWED
-import MP4Handler;
+import vlc.MP4Handler;
 #end
 
 using StringTools;

@@ -1,0 +1,32 @@
+{
+	"songs": [
+		[
+			"Code-and-Stuff",
+			"joalor64",
+			[
+				0,
+				53,
+				255
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "bruh",
+	"difficulties": "Hard",
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"storyName": "VS Joalor64 (DEMO)",
+	"weekName": "Custom Week",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}

@@ -81,7 +81,7 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-		    ['VS Joalor64 Team'],
+		        ['VS Joalor64 Team'],
 			['Joalor64 YT',		'joalor64',		'Leader of Project\nProgrammer, Composer, Artist',							'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg',	'03F0FC'],
 			['NyxTheShield',			'nyx',		'BF Voice Samples',						'https://github.com/NyxTheShield',		'8AE8FF'],
 			[''],

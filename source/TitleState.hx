@@ -351,7 +351,7 @@ class TitleState extends MusicBeatState
 
 		credTextShit.visible = false;
 
-        #if MOD_WATERMARKS
+                #if MOD_WATERMARKS
 		psychSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('psych_logo'));
 		add(psychSpr);
 		psychSpr.visible = false;
@@ -603,7 +603,7 @@ class TitleState extends MusicBeatState
 					createCoolText(['In association', 'with'], -40);
 					#end
 				case 7:
-				    #if MOD_WATERMARKS
+				        #if MOD_WATERMARKS
 					addMoreText('Psych Engine', -40);
 					psychSpr.visible = true;
 					#else

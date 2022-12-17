@@ -84,6 +84,7 @@ class CreditsState extends MusicBeatState
 		        ['VS Joalor64 Team'],
 			['Joalor64 YT',		'joalor64',		'Leader of Project\nProgrammer, Composer, Artist',							'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg',	'03F0FC'],
 			['NyxTheShield',			'nyx',		'BF Voice Samples',						'https://github.com/NyxTheShield',		'8AE8FF'],
+			['IAmNotTwo',			'iamnottwo',		'Baldi Clock Timer Script',						'https://gamebanana.com/members/2247310',		'CEFF63'],
 			[''],
 			['Psych Engine Team'],
 			['ShadowMario',		'shadowmario',		'Main Programmer of Psych Engine',							'https://twitter.com/Shadow_Mario_',	'444444'],

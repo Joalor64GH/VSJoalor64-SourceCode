@@ -60,6 +60,9 @@ class TitleState extends MusicBeatState
 	var credGroup:FlxGroup;
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
+	#if MOD_WATERMARKS
+	var psychSpr:FlxSprite;
+	#end
 	var ngSpr:FlxSprite;
 
 	var curWacky:Array<String> = [];
@@ -348,6 +351,15 @@ class TitleState extends MusicBeatState
 
 		credTextShit.visible = false;
 
+        #if MOD_WATERMARKS
+		psychSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('psych_logo'));
+		add(psychSpr);
+		psychSpr.visible = false;
+		psychSpr.setGraphicSize(Std.int(psychSpr.width * 0.8));
+		psychSpr.updateHitbox();
+		psychSpr.screenCenter(X);
+		psychSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		#else
 		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
 		add(ngSpr);
 		ngSpr.visible = false;
@@ -355,6 +367,12 @@ class TitleState extends MusicBeatState
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		#end
+
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "VS Joalor64 v1.0.0-DEMO (PE 0.5.2h)", 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
@@ -587,14 +605,19 @@ class TitleState extends MusicBeatState
 				case 7:
 				    #if MOD_WATERMARKS
 					addMoreText('Psych Engine', -40);
+					psychSpr.visible = true;
 					#else
 					addMoreText('newgrounds', -40);
-					#end
 					ngSpr.visible = true;
+					#end
 				// credTextShit.text += '\nNewgrounds';
 				case 8:
 					deleteCoolText();
+					#if MOD_WATERMARKS
+					psychSpr.visible = false;
+					#else
 					ngSpr.visible = false;
+					#end
 				// credTextShit.visible = false;
 
 				// credTextShit.text = 'Shoutouts Tom Fulp';
@@ -650,7 +673,11 @@ class TitleState extends MusicBeatState
 						sound = FlxG.sound.play(Paths.sound('JingleBB'));
 					
 					default: //Go back to normal ugly ass boring GF
+						#if MOD_WATERMARKS
+						remove (psychSpr);
+						#else
 						remove(ngSpr);
+						#end
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
@@ -666,7 +693,11 @@ class TitleState extends MusicBeatState
 				{
 					new FlxTimer().start(3.2, function(tmr:FlxTimer)
 					{
+						#if MOD_WATERMARKS
+						remove (psychSpr);
+						#else
 						remove(ngSpr);
+						#end
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
 						transitioning = false;
@@ -674,7 +705,11 @@ class TitleState extends MusicBeatState
 				}
 				else
 				{
+					#if MOD_WATERMARKS
+					remove (psychSpr);
+					#else
 					remove(ngSpr);
+					#end
 					remove(credGroup);
 					FlxG.camera.flash(FlxColor.WHITE, 3);
 					sound.onComplete = function() {
@@ -687,7 +722,11 @@ class TitleState extends MusicBeatState
 			}
 			else //Default! Edit this one!!
 			{
+				#if MOD_WATERMARKS
+				remove (psychSpr);
+				#else
 				remove(ngSpr);
+				#end
 				remove(credGroup);
 				FlxG.camera.flash(FlxColor.WHITE, 4);
 

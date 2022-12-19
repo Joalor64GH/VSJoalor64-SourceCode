@@ -32,6 +32,8 @@ class ExtrasMenuState extends MusicBeatState
 	private var camAchievement:FlxCamera;
 	public static var firstStart:Bool = true;
 	var optionShit:Array<String> = [
+		#if MODS_ALLOWED 'mods', #end
+		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
 		'donate',
 		'editors'
@@ -200,9 +202,11 @@ class ExtrasMenuState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									#if MODS_ALLOWED
+									#if (MODS_ALLOWED || ACHIEVEMENTS_ALLOWED)
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
+									case 'awards':
+										MusicBeatState.switchState(new AchievementsMenuState());
 									#end
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());

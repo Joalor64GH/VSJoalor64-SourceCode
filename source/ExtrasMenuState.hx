@@ -32,7 +32,6 @@ class ExtrasMenuState extends MusicBeatState
 	private var camAchievement:FlxCamera;
 	public static var firstStart:Bool = true;
 	var optionShit:Array<String> = [
-		#if MODS_ALLOWED 'mods', #end
 		'credits',
 		'donate',
 		'editors'

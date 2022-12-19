@@ -674,7 +674,7 @@ class TitleState extends MusicBeatState
 					
 					default: //Go back to normal ugly ass boring GF
 						#if MOD_WATERMARKS
-						remove (psychSpr);
+						remove(psychSpr);
 						#else
 						remove(ngSpr);
 						#end
@@ -694,7 +694,7 @@ class TitleState extends MusicBeatState
 					new FlxTimer().start(3.2, function(tmr:FlxTimer)
 					{
 						#if MOD_WATERMARKS
-						remove (psychSpr);
+						remove(psychSpr);
 						#else
 						remove(ngSpr);
 						#end
@@ -706,7 +706,7 @@ class TitleState extends MusicBeatState
 				else
 				{
 					#if MOD_WATERMARKS
-					remove (psychSpr);
+					remove(psychSpr);
 					#else
 					remove(ngSpr);
 					#end
@@ -723,7 +723,7 @@ class TitleState extends MusicBeatState
 			else //Default! Edit this one!!
 			{
 				#if MOD_WATERMARKS
-				remove (psychSpr);
+				remove(psychSpr);
 				#else
 				remove(ngSpr);
 				#end

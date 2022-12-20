@@ -18,7 +18,6 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.app.Application;
 import Achievements;
-import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
 
 using StringTools;
@@ -210,8 +209,6 @@ class ExtrasMenuState extends MusicBeatState
 									#end
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
-									case 'editors':
-										MusicBeatState.switchState(new MasterEditorMenu());
 								}
 							});
 						}

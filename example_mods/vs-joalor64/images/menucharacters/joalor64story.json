@@ -1,0 +1,11 @@
+{
+	
+	"image": "Menu_Joalor",
+	"position": [
+		0,
+		0
+	],
+	"scale": 1,
+	"idle_anim": "M Joalor Idle",
+	"confirm_anim": "M Joalor Idle"
+}

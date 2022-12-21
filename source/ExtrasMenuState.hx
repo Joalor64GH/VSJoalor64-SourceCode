@@ -34,8 +34,7 @@ class ExtrasMenuState extends MusicBeatState
 		#if MODS_ALLOWED 'mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
-		'donate',
-		'editors'
+		'donate'
 	];
 
 	var magenta:FlxSprite;

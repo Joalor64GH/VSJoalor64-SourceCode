@@ -1,0 +1,82 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk",
+			"text": "That was epicness!",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "joalorDefault"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "joalorDefault",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "One more before you go?"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "excited",
+			"text": "Sure thing, bruv."
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "I'd rather commit eat dorito vertically."
+		},
+		{
+			"expression": "talk",
+			"text": "Okay, you are actually annoying.",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "joalorAngy"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "joalorAngy",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Like, shut up bruh."
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Thank you so much for that. I didn't have the courage to tell her myself."
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Okay, jeez."
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Don't be like that. Somebody had to tell ya."
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "excited",
+			"text": "lmao"
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"name": "Useless Button",
+	"description": "This is literally useless.",
+	"saveKey": "godDamn",
+	"type": "bool",
+	"defaultValue": false,
+        "options": [],
+        "minValue": null,
+	"maxValue": null,
+	"changeValue": null,
+        "scrollSpeed": null,
+        "displayFormat": ""
+}

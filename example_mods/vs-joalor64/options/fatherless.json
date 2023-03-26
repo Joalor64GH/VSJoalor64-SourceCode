@@ -1,0 +1,13 @@
+{
+	"name": "Fatherless",
+	"description": "Your father went to get the milk.",
+	"saveKey": "noMilk",
+	"type": "bool",
+	"defaultValue": false,
+        "options": [],
+        "minValue": null,
+	"maxValue": null,
+	"changeValue": null,
+        "scrollSpeed": null,
+        "displayFormat": ""
+}

@@ -1,0 +1,34 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk",
+			"text": "Well...",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "joalorDefault"
+		},
+		{
+			"expression": "talk",
+			"text": "You completed the week!",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "joalorDefault"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "joalorDefault",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "As a gift of gratitude, check out the freeplay menu!"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "joalorDefault",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Bye!"
+		}
+	]
+}

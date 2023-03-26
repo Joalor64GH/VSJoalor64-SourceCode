@@ -1,0 +1,9 @@
+{
+	"name": "Winner Winner Chicken Dinner!",
+	"desc": "Complete the mod!",
+	"save_tag": "mod_complete",
+	"hidden": false,
+	"clearAchievements": false,
+	"index": 0,
+        "song": "klassicheskiy-ritm"
+}

@@ -1,0 +1,58 @@
+{
+	"dialogue": [
+		{
+			"expression": "excited",
+			"text": "That was fun lol",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf"
+		},
+		{
+			"expression": "talk",
+			"text": "But why does the instrumental sound like it was made with onlinesequencer.net?",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "joalorWatafac",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "(Because it is and was???)"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "joalorDefault",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Well anyways, I got another song for ya!"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "okay bc i have nothing else to do except (bing) chilling with my babe"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "This video is sponsered by Raid Sha-"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "no"
+		}
+	]
+}

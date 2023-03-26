@@ -1,8 +1,6 @@
 {
 	"songs": [
-		["Code-and-Stuff", "joalor64", [0, 53, 255]],
-		["Imagination", "joalor64", [0, 53, 255]],
-		["The-Finale", "joalor64", [0, 53, 255]]
+		["Klassicheskiy-Ritm", "ushanka", [0, 53, 255]]
 	],
 	"hiddenUntilUnlocked": false,
 	"hideFreeplay": false,
@@ -13,14 +11,14 @@
 		"bf",
 		"gf"
 	],
-	"storyName": "VS Joalor64",
+	"storyName": "Funni Bonus",
 	"weekName": "Custom Week",
 	"freeplayColor": [
 		146,
 		113,
 		253
 	],
-	"hideStoryMode": false,
-	"weekBefore": "tutorial",
+	"hideStoryMode": true,
+	"weekBefore": "weekA",
 	"startUnlocked": true
 }

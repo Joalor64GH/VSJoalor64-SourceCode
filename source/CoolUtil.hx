@@ -1,6 +1,6 @@
 package;
 
-import flxiel.FlxG;
+import flixel.FlxG;
 import openfl.utils.Assets;
 
 using StringTools;

@@ -17,27 +17,26 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.app.Application;
+import Achievements;
 import flixel.input.keyboard.FlxKey;
 
-import Achievements;
+import editors.*;
 
 using StringTools;
 
-class ExtrasMenuState extends MusicBeatState
+class PlayMenuState extends MusicBeatState
 {
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
-
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
 	public static var firstStart:Bool = true;
 	public static var finishedFunnyMove:Bool = false;
 	
 	var optionShit:Array<String> = [
-		'discord',
-		#if ACHIEVEMENTS_ALLOWED 'awards', #end
-		'ost'
+		'story_mode',
+		'freeplay'
 	];
 
 	var bg:FlxSprite;
@@ -103,6 +102,8 @@ class ExtrasMenuState extends MusicBeatState
 		magenta.antialiasing = ClientPrefs.globalAntialiasing;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
+		
+		// magenta.scrollFactor.set();
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -124,6 +125,7 @@ class ExtrasMenuState extends MusicBeatState
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set(0, 1);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
+			menuItem.updateHitbox();
 			if (firstStart)
 				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
 					{
@@ -177,52 +179,47 @@ class ExtrasMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-                		if (optionShit[curSelected] == 'ost')
-				{
-					CoolUtil.browserLoad('https://www.youtube.com/playlist?list=PLxj2uzHFxP2Z4LZymCMwCDqEe3OsX1poD');
-				}
-				else if (optionShit[curSelected] == 'discord')
-				{
-					// Join my server plz :))
-					CoolUtil.browserLoad('https://discord.gg/ScMB5ZX2mE');
-				}
-				else
-				{
-					selectedSomethin = true;
-					FlxG.sound.play(Paths.sound('confirmMenu'));
+				selectedSomethin = true;
+				FlxG.sound.play(Paths.sound('confirmMenu'));
 
-					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+				if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
-					menuItems.forEach(function(spr:FlxSprite)
+				menuItems.forEach(function(spr:FlxSprite)
+				{
+					if (curSelected != spr.ID)
 					{
-						if (curSelected != spr.ID)
-						{
-							FlxTween.tween(spr, {alpha: 0}, 0.4, {
-								ease: FlxEase.quadOut,
-								onComplete: function(twn:FlxTween)
-								{
-									spr.kill();
-								}
-							});
-						}
-						else
-						{
-							FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+						FlxTween.tween(spr, {alpha: 0}, 0.4, {
+							ease: FlxEase.quadOut,
+							onComplete: function(twn:FlxTween)
 							{
-								var daChoice:String = optionShit[curSelected];
+								spr.kill();
+							}
+						});
+					}
+					else
+					{
+						FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+						{
+							var daChoice:String = optionShit[curSelected];
 
-								switch (daChoice)
-								{
-									#if ACHIEVEMENTS_ALLOWED
-									case 'awards':
-										MusicBeatState.switchState(new AchievementsMenuState());
-									#end
-								}
-							});
-						}
-					});
-				}
+							switch (daChoice)
+							{
+								case 'story_mode':
+									MusicBeatState.switchState(new StoryMenuState());
+								case 'freeplay':
+									MusicBeatState.switchState(new FreeplayState());
+							}
+						});
+					}
+				});
 			}
+			#if desktop
+			else if (FlxG.keys.anyJustPressed(debugKeys))
+			{
+				selectedSomethin = true;
+				MusicBeatState.switchState(new MasterEditorMenu());
+			}
+			#end
 		}
 
 		super.update(elapsed);
@@ -259,7 +256,7 @@ class ExtrasMenuState extends MusicBeatState
 			}
 		});
 	}
-	
+
 	public static function randomizeBG():flixel.system.FlxAssets.FlxGraphicAsset
 	{
 		var chance:Int = FlxG.random.int(0, bgPaths.length - 1);

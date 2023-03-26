@@ -82,26 +82,136 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 		        ['VS Joalor64 Team'],
-			['Joalor64 YT',		'joalor64',		'Leader of Project\nProgrammer, Composer, Artist',							'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg',	'03F0FC'],
-			['NyxTheShield',			'nyx',		'BF Voice Samples',						'https://github.com/NyxTheShield',		'8AE8FF'],
-			['IAmNotTwo',			'iamnottwo',		'Baldi Clock Timer Script',						'https://gamebanana.com/members/2247310',		'CEFF63'],
+			[
+				'Joalor64 YT',		
+				'joalor64',		
+				'Leader of Project\nProgrammer, Composer, Artist',							
+				'https://www.youtube.com/channel/UC4tRMRL_iAHX5n1qQpHibfg',	
+				'03F0FC'
+			],
+			[
+				'NyxTheShield',			
+				'nyx',		
+				'BF Voice Samples',						
+				'https://github.com/NyxTheShield',		
+				'8AE8FF'
+			],
+			[
+				'IAmNotTwo',			
+				'iamnottwo',		
+				'Baldi Clock Timer Script',						
+				'https://gamebanana.com/members/2247310',		
+				'CEFF63'
+			],
+			[
+				'TheWorldMachinima',			
+				'macxp',		
+				'Softcoded Achievements',						
+				'https://github.com/TheWorldMachinima',		
+				'FBFF01'
+			],
+			[
+				'KookerFoxYT',
+				'fox',
+				'Custom Options',
+				'https://github.com/KookerFoxYT',
+				'00B0B4'
+			],
 			[''],
 			['Psych Engine Team'],
-			['ShadowMario',		'shadowmario',		'Main Programmer of Psych Engine',							'https://twitter.com/Shadow_Mario_',	'444444'],
-			['RiverOaken',			'riveroaken',		'Main Artist/Animator of Psych Engine',						'https://twitter.com/RiverOaken',		'C30085'],
-			['Yoshubs',				'shubs',			'Additional Programmer of Psych Engine\nEpic Input System',					'https://twitter.com/yoshubs',			'279ADC'],
-			['bbpanzu',			'bb-panzu',			'Ex-Programmer of Psych Engine',							'https://twitter.com/bbsub3',			'389A58'],
-			['iFlicky',				'iflicky',			'Composer of Psync and Tea Time\nMade the Dialogue Sounds',	'https://twitter.com/flicky_i',			'AA32FE'],
-			['gedehari',			'gedehari',			'Chart Editor\'s Sound Waveform base',						'https://twitter.com/gedehari',			'FF9300'],
-			['PolybiusProxy',		'polybiusproxy',	'Creator of hxCodec',								'https://twitter.com/polybiusproxy',	'FFEAA6'],
-			['Keoiki',				'keoiki',			'Note Splash Animations',									'https://twitter.com/Keoiki_',			'FFFFFF'],
-			['Smokey',				'smokey',			'Spritemap Texture Support',								'https://twitter.com/Smokey_5_',		'4D5DBD'],
+			[
+				'ShadowMario',		
+				'shadowmario',		
+				'Main Programmer of Psych Engine',							
+				'https://twitter.com/Shadow_Mario_',	
+				'444444'
+			],
+			[
+				'RiverOaken',			
+				'riveroaken',		
+				'Main Artist/Animator of Psych Engine',						
+				'https://twitter.com/RiverOaken',		
+				'C30085'
+			],
+			[
+				'Yoshubs',				
+				'shubs',			
+				'Additional Programmer of Psych Engine\nEpic Input System',					
+				'https://twitter.com/yoshubs',			
+				'279ADC'
+			],
+			[
+				'bbpanzu',			
+				'bb-panzu',			
+				'Ex-Programmer of Psych Engine',							
+				'https://twitter.com/bbsub3',			
+				'389A58'
+			],
+			[
+				'iFlicky',				
+				'iflicky',			
+				'Composer of Psync and Tea Time\nMade the Dialogue Sounds',	
+				'https://twitter.com/flicky_i',			
+				'AA32FE'
+			],
+			[
+				'gedehari',			
+				'gedehari',			
+				'Chart Editor\'s Sound Waveform base',						
+				'https://twitter.com/gedehari',			
+				'FF9300'
+			],
+			[
+				'PolybiusProxy',		
+				'polybiusproxy',	
+				'Creator of hxCodec',								
+				'https://twitter.com/polybiusproxy',	
+				'FFEAA6'
+			],
+			[
+				'Keoiki',				
+				'keoiki',			
+				'Note Splash Animations',									
+				'https://twitter.com/Keoiki_',			
+				'FFFFFF'
+			],
+			[
+				'Smokey',				
+				'smokey',			
+				'Spritemap Texture Support',								
+				'https://twitter.com/Smokey_5_',		
+				'4D5DBD'
+			],
 			[''],
 			["Funkin' Crew"],
-			['ninjamuffin99',		'ninjamuffin99',	"Programmer/Creator of Friday Night Funkin'",						'https://twitter.com/ninja_muffin99',	'F73838'],
-			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",							'https://twitter.com/PhantomArcade3K',	'FFBB1B'],
-			['Evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",							'https://twitter.com/evilsk8r',			'53E52C'],
-			['Kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",							'https://twitter.com/kawaisprite',		'6475F3']
+			[
+				'ninjamuffin99',		
+				'ninjamuffin99',	
+				"Programmer/Creator of Friday Night Funkin'",						
+				'https://twitter.com/ninja_muffin99',	
+				'F73838'
+			],
+			[
+				'PhantomArcade',		
+				'phantomarcade',	
+				"Animator of Friday Night Funkin'",							
+				'https://twitter.com/PhantomArcade3K',	
+				'FFBB1B'
+			],
+			[
+				'Evilsk8r',			
+				'evilsk8r',			
+				"Artist of Friday Night Funkin'",							
+				'https://twitter.com/evilsk8r',			
+				'53E52C'
+			],
+			[
+				'Kawaisprite',			
+				'kawaisprite',		
+				"Composer of Friday Night Funkin'",							
+				'https://twitter.com/kawaisprite',		
+				'6475F3'
+			]
 		];
 		
 		for(i in pisspoop){

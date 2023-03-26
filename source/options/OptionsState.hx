@@ -25,29 +25,46 @@ import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
 
+import options.*;
+
 using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay'];
+	var options:Array<String> = [
+		#if MODS_ALLOWED 'Mod Options', #end
+		'Note Colors', 
+		'Controls', 
+		'Adjust Delay and Combo', 
+		'Graphics', 
+		'Visuals and UI', 
+		'Gameplay'
+	];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
+			#if MODS_ALLOWED
+			case 'Mod Options':
+				if(Paths.optionsExist())
+					FlxG.switchState(new ModOptionSelectState());
+				else
+					FlxG.switchState(new error.OopsState());
+			#end
 			case 'Note Colors':
-				openSubState(new options.NotesSubState());
+				openSubState(new NotesSubState());
 			case 'Controls':
-				openSubState(new options.ControlsSubState());
+				openSubState(new ControlsSubState());
 			case 'Graphics':
-				openSubState(new options.GraphicsSettingsSubState());
+				openSubState(new GraphicsSettingsSubState());
 			case 'Visuals and UI':
-				openSubState(new options.VisualsUISubState());
+				openSubState(new VisualsUISubState());
 			case 'Gameplay':
-				openSubState(new options.GameplaySettingsSubState());
+				openSubState(new GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
-				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+				LoadingState.loadAndSwitchState(new NoteOffsetState());
 		}
 	}
 

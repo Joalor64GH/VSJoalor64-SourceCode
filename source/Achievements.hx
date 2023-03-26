@@ -7,25 +7,94 @@ import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
 
+#if MODS_ALLOWED
+import sys.io.File;
+import sys.FileSystem;
+#end
+
 using StringTools;
+
+typedef AchievementMeta = {
+	public var name:String;
+	public var desc:String;
+	public var save_tag:String;
+	public var hidden:Bool;
+	public var ?song:String;
+
+	public var ?week_nomiss:String;
+	public var ?lua_code:String;
+	/**
+		If null or -1, gets pushed instead of getting inserting to specified index.
+	**/
+	public var ?index:Int;
+	/**
+		If not null, replaces achievements completely.
+		
+		Using global is dangerous and it should be used just once in a modpack.
+	**/
+	public var ?global:Array<Dynamic>;
+	/**
+	    If true, clears the vanilla achievements.
+		
+		Same goes for clearAchievements, it should be used just once in a modpack and global should be null aswell.
+	**/
+	public var ?clearAchievements:Bool; 
+}
 
 class Achievements {
 	public static var achievementsStuff:Array<Dynamic> = [ //Name, Description, Achievement save tag, Hidden achievement
-		["What a Funkin' Disaster!",	"Complete a Song with a rating lower than 20%.",	'ur_bad',				false],
-		["Perfectionist",				"Complete a Song with a rating of 100%.",			'ur_good',				false],
-		["Oversinging Much...?",		"Hold down a note for 10 seconds.",					'oversinging',			false],
-		["Hyperactive",					"Finish a Song without going Idle.",				'hype',					false],
-		["Just the Two of Us",			"Finish a Song pressing only two keys.",			'two_keys',				false],
-		["Toaster Gamer",				"Have you tried to run the game on a toaster?",		'toastie',				false],
-		["Debugger",					"Beat the \"Test\" Stage from the Chart Editor.",	'debugger',				 true]
+		[
+			"What a Funkin' Disaster!",	
+			"Complete a Song with a rating lower than 20%.",	
+			'ur_bad',				
+			false
+		],
+		[
+			"Perfectionist",				
+			"Complete a Song with a rating of 100%.",			
+			'ur_good',				
+			false
+		],
+		[
+			"Oversinging Much...?",		
+			"Hold down a note for 10 seconds.",					
+			'oversinging',			
+			false
+		],
+		[
+			"Hyperactive",					
+			"Finish a Song without going Idle.",				
+			'hype',					
+			false
+		],
+		[
+			"Just the Two of Us",			
+			"Finish a Song pressing only two keys.",			
+			'two_keys',				
+			false
+		],
+		[
+			"Toaster Gamer",				
+			"Have you tried to run the game on a toaster?",		
+			'toastie',				
+			false
+		]
 	];
+	public static var copyAchievements = achievementsStuff.copy();
 	public static var achievementsMap:Map<String, Bool> = new Map<String, Bool>();
 
-	public static var henchmenDeath:Int = 0;
 	public static function unlockAchievement(name:String):Void {
 		FlxG.log.add('Completed achievement "' + name +'"');
 		achievementsMap.set(name, true);
 		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+	}
+
+	public static function exists(name:String) {
+		for (i in achievementsStuff) {
+			if (i[2] == name) return true;
+		}
+
+		return false;
 	}
 
 	public static function isAchievementUnlocked(name:String) {
@@ -45,6 +114,10 @@ class Achievements {
 	}
 
 	public static function loadAchievements():Void {
+		#if (MODS_ALLOWED && ACHIEVEMENTS_ALLOWED)
+		loadModAchievements();
+		#end
+
 		if(FlxG.save.data != null) {
 			if(FlxG.save.data.achievementsMap != null) {
 				achievementsMap = FlxG.save.data.achievementsMap;
@@ -55,9 +128,6 @@ class Achievements {
 				for (i in 0...savedStuff.length) {
 					achievementsMap.set(savedStuff[i], true);
 				}
-			}
-			if(henchmenDeath == 0 && FlxG.save.data.henchmenDeath != null) {
-				henchmenDeath = FlxG.save.data.henchmenDeath;
 			}
 		}
 
@@ -75,6 +145,96 @@ class Achievements {
 
 		// EDIT 2: Uhh this is weird, this message was written for MInd Games, so it doesn't apply logically for Psych Engine LOL
 	}
+
+	#if (MODS_ALLOWED && ACHIEVEMENTS_ALLOWED)
+	public static function loadModAchievements() {
+		achievementsStuff = copyAchievements.copy();
+		var oldPath:Array<String> = Paths.globalMods.copy();
+		Paths.globalMods = [];
+		var paths:Array<String>= [Paths.modFolders('achievements/'),Paths.getPreloadPath('achievements/'),];
+		Paths.globalMods = oldPath;
+		for(i in paths.copy()){
+			if(FileSystem.exists(i)){
+				for(l in FileSystem.readDirectory(i)){
+					if(l.endsWith('.json')){
+						var meta:AchievementMeta = cast haxe.Json.parse(File.getContent(i + l));
+						if(meta!=null){
+							if (meta.global != null && meta.global.length > 0 && !FileSystem.exists(i + l.substring(0, l.length - 4) + 'lua'))
+								throw "(" + l + ") global needs a lua file to work.\nCreate a lua file named \"" + l.substring(0, l.length - 5) + "\" in \"" + i + "\".";
+
+							if(meta.global==null||meta.global.length<1){
+								if(meta.clearAchievements)
+									achievementsStuff=[];
+								var achievement:Array<Dynamic> = [];
+								achievement.push(meta.name);
+								achievement.push(meta.desc);
+								achievement.push(meta.save_tag);
+								achievement.push(meta.hidden);
+								var index:Null<Int> = meta.index;
+								if(!achievementsStuff.contains(achievement)) {
+									if(index==null||index<0){
+										achievementsStuff.push(achievement.copy());
+									}
+									else {
+										achievementsStuff.insert(index,achievement);
+									}
+								}
+							}
+							else{
+								achievementsStuff = meta.global.copy();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public static function getModAchievements():Array<String> {
+		var oldPath:Array<String> = Paths.globalMods.copy();
+		Paths.globalMods = [];
+		var paths:Array<String>= [Paths.modFolders('achievements/'),Paths.getPreloadPath('achievements/'),];
+		Paths.globalMods = oldPath;
+		var luas:Array<String> = [];
+		for(i in paths){
+			if(FileSystem.exists(i)){
+				for(l in FileSystem.readDirectory(i)){
+					var pushedLuas = [];
+					var file = l.substr(0, l.length - 4);
+					//ignore lua files that does not have a json file
+					if (l.endsWith('.lua') && FileSystem.exists(i+file+'.json') && !pushedLuas.contains(l)) {
+						luas.push(i+l);
+						pushedLuas.push(l);
+					}
+				}
+			}
+		}
+		return luas.copy();
+	}
+
+	public static function getModAchievementMetas():Array<AchievementMeta> {
+		var oldPath:Array<String> = Paths.globalMods.copy();
+		Paths.globalMods = [];
+		var paths:Array<String>= [Paths.modFolders('achievements/'),Paths.getPreloadPath('achievements/'),];
+		Paths.globalMods = oldPath;
+		var metas = [];
+		for(i in paths)
+			if(FileSystem.exists(i))
+				for(l in FileSystem.readDirectory(i))
+					if(l.endsWith('.json'))
+					{
+						try {
+							var meta:AchievementMeta = haxe.Json.parse(File.getContent(i + l));
+							metas.push(meta);
+						}
+						catch(e) {
+							trace(e.stack);
+						}
+					}
+
+		return metas;
+	}
+	#end
 }
 
 class AttachedAchievement extends FlxSprite {

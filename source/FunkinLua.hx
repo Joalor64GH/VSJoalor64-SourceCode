@@ -55,7 +55,10 @@ class FunkinLua {
 	var gonnaClose:Bool = false;
 
 	public var accessedProps:Map<String, Dynamic> = null;
-	public function new(script:String) {
+
+	public var scriptCode:String;
+
+	public function new(script:String, ?scriptCode:String) {
 		#if LUA_ALLOWED
 		lua = LuaL.newstate();
 		LuaL.openlibs(lua);
@@ -65,7 +68,11 @@ class FunkinLua {
 		//trace("LuaJIT version: " + Lua.versionJIT());
 
 		LuaL.dostring(lua, CLENSE);
-		var result:Dynamic = LuaL.dofile(lua, script);
+		var result;
+			if(scriptCode != null) 
+				result = LuaL.dostring(lua, scriptCode);
+			else
+				result = LuaL.dofile(lua, script);
 		var resultStr:String = Lua.tostring(lua, result);
 		if(resultStr != null && result != 0) {
 			trace('Error on lua script! ' + resultStr);
@@ -77,6 +84,8 @@ class FunkinLua {
 			lua = null;
 			return;
 		}
+		if (scriptCode != null) 
+			this.scriptCode = scriptCode;
 		scriptName = script;
 		trace('lua file loaded succesfully:' + script);
 
@@ -1302,7 +1311,7 @@ class FunkinLua {
 			}
 		});
 		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String) {
-			#if VIDEOS_ALLOWED
+			#if (VIDEOS_ALLOWED && WEBM_ALLOWED)
 			if(FileSystem.exists(Paths.video(videoFile))) {
 				PlayState.instance.startVideo(videoFile);
 			} else {
@@ -1315,6 +1324,16 @@ class FunkinLua {
 				PlayState.instance.startCountdown();
 			}
 			#end
+		});
+
+		Lua_helper.add_callback(lua, "backgroundVideo", function(video:String):Void
+		{
+			PlayState.instance.backgroundVideo(video);
+		});
+
+		Lua_helper.add_callback(lua, "endBGVideo", function():Void
+		{
+			PlayState.instance.endBGVideo();
 		});
 		
 		Lua_helper.add_callback(lua, "playMusic", function(sound:String, volume:Float = 1, loop:Bool = false) {

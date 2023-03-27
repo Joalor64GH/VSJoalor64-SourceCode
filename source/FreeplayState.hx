@@ -101,15 +101,7 @@ class FreeplayState extends MusicBeatState
 			grpSongs.add(songText);
 
 			if (songText.width > 980)
-			{
-				var textScale:Float = 980 / songText.width;
-				songText.scale.x = textScale;
-				for (letter in songText.lettersArray)
-				{
-					letter.x *= textScale;
-					letter.offset.x *= textScale;
-				}
-			}
+				songText.scale.x = 980 / songText.width;
 
 			Paths.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);

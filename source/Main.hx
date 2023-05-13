@@ -34,24 +34,6 @@ class Main extends Sprite
 	{
 		super();
 
-		if (stage != null)
-			init();
-		else
-			addEventListener(Event.ADDED_TO_STAGE, init);
-	}
-
-	public static var webmHandler:WebmHandler;
-
-	private function init(?E:Event):Void
-	{
-		if (hasEventListener(Event.ADDED_TO_STAGE))
-			removeEventListener(Event.ADDED_TO_STAGE, init);
-
-		setupGame();
-	}
-
-	private function setupGame():Void
-	{
 		gameWidth = GameDimensions.width;
 		gameHeight = GameDimensions.height;
 		
@@ -100,8 +82,9 @@ class Main extends Sprite
 		#end
 
 		#if html5
-		FlxG.autoPause = false;
-		FlxG.mouse.visible = false;
+		FlxG.autoPause = FlxG.mouse.visible = false;
 		#end
 	}
+
+	public static var webmHandler:WebmHandler;
 }

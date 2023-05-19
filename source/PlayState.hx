@@ -91,16 +91,24 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['You Suck!', 0.2], //From 0% to 19%
-		['Shit', 0.4], //From 20% to 39%
-		['Bad', 0.5], //From 40% to 49%
-		['Bruh', 0.6], //From 50% to 59%
-		['Meh', 0.69], //From 60% to 68%
-		['Nice', 0.7], //69%
-		['Good', 0.8], //From 70% to 79%
-		['Great', 0.9], //From 80% to 89%
-		['Sick!', 1], //From 90% to 99%
-		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['F-', 0.2],
+		['F', 0.5],
+		['D', 0.6],
+		['C', 0.7],
+		['B', 0.8],
+		['A-', 0.89],
+		['A', 0.90],
+		['A+', 0.93],
+		['S-', 0.96],
+		['S', 0.99],
+		['S+', 0.997],
+		['SS-', 0.998],
+		['SS', 0.999],
+		['SS+', 0.9995],
+		['X-', 0.9997],
+		['X', 0.9998],
+		['X+', 0.999935],
+		['P', 1.0]
 	];
 
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
@@ -291,6 +299,8 @@ class PlayState extends MusicBeatState
 	// Less laggy controls
 	private var keysArray:Array<Dynamic>;
 
+	public var comboFunction:Void->Void = null;
+
 	override public function create()
 	{
 		Paths.clearStoredMemory();
@@ -311,6 +321,33 @@ class PlayState extends MusicBeatState
 			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_right'))
 		];
 
+		comboFunction = () -> {
+			// Rating FC
+			ratingFC = "CB";
+			if (songMisses < 1){
+				if (shits > 0)
+					ratingFC = "FC";
+				else if (bads > 0)
+					ratingFC = "GFC";
+				else if (goods > 0)
+					ratingFC = "MFC";
+				else if (sicks > 0)
+					ratingFC = "SFC";
+			}
+			else if (songMisses < 10){
+				ratingFC = "SDCB";
+			}
+			else if (songMisses < 100){
+				ratingFC = "WTF??";
+			}
+			else if (cpuControlled){
+				ratingFC = "Cheater!";
+			}
+			else if (practiceMode){
+				ratingFC = "N/A";
+			}
+		}
+
 		// For the "Just the Two of Us" achievement
 		for (i in 0...keysArray.length)
 		{
@@ -327,7 +364,6 @@ class PlayState extends MusicBeatState
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
 
-		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
@@ -1097,6 +1133,11 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
+		var versionTxt:FlxText = new FlxText(4, FlxG.height - 24, 0, '${SONG.song} ${CoolUtil.difficultyString()} - VS Joalor64 v${MainMenuState.Modver}', 12);
+		versionTxt.scrollFactor.set();
+		versionTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionTxt);
+
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
@@ -1109,6 +1150,7 @@ class PlayState extends MusicBeatState
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
+		versionTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 		startingSong = true;
 
@@ -2298,8 +2340,8 @@ class PlayState extends MusicBeatState
 		} else {
 			scoreTxt.text = 'Score: ' + songScore 
 			+ ' // Combo Breaks: ' + songMisses 
-			+ ' // Accuracy: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' 
-			+ ' // Rank: ' + ratingFC;
+			+ ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' 
+			+ ' // Rank: ' + ratingName + ' (' + ratingFC + ')';
 		}
 
 		if(botplayTxt.visible) {
@@ -4004,7 +4046,6 @@ class PlayState extends MusicBeatState
 
 	var trainMoving:Bool = false;
 	var trainFrameTiming:Float = 0;
-
 	var trainCars:Int = 8;
 	var trainFinishing:Bool = false;
 	var trainCooldown:Int = 0;
@@ -4146,7 +4187,6 @@ class PlayState extends MusicBeatState
 	var lightningOffset:Int = 8;
 
 	var lastBeatHit:Int = -1;
-	
 	override function beatHit()
 	{
 		super.beatHit();
@@ -4343,17 +4383,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			// Rating FC
-			ratingFC = "";
-			if (sicks > 0) ratingFC = "PFC";
-			if (goods > 0) ratingFC = "SFC";
-			if (bads > 0) ratingFC = "DFC";
-			if (shits > 0) ratingFC = "FC";
-			if (songMisses > 0 && songMisses < 10) ratingFC = "SDM";
-			else if (songMisses >= 10) ratingFC = "Clear";
-			else if (songMisses >= 100) ratingFC = "WTF??";
-			else if (cpuControlled) ratingFC = "Cheater!";
-			else if (practiceMode) ratingFC = "N/A";
+			comboFunction();
 		}
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);

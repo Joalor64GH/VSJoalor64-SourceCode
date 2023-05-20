@@ -187,7 +187,7 @@ class TitleState extends MusicBeatState
 		psychSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
 		// Upsilon Engine Watermark
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "VS Joalor64 v1.0.0 (UE 0.1.0)", 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "VS Joalor64 v1.0.5 (UE 0.1.0)", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
